@@ -1,0 +1,23 @@
+ <!-- edit profile form -->
+<main class="form">
+    <div class="columns is-centered">
+        <div class="column is-4">
+                <%= form_with url: "/users/#{params[:id]}/update", method: :post do |form| %>
+                    <form class="box">
+
+                        <%= form.label :full_name, class: "label mt-3" %>
+                        <%= form.text_field :name, value: "#{@user.name}", class: "input" %>
+
+                        <%= form.label :email, class: "label mt-3" %>
+                        <%= form.email_field :email, value: "#{@user.email}", class: "input" %>
+                    
+                        <%= form.label "Profile Picture", class: "label mt-3" %>
+                        <%= form.file_field :image, class: "input" %>
+
+                        <%= form.submit "Submit", class: "button is-primary mt-3" %>
+
+                    </form>
+                <% end %>
+        </div>
+    </div>
+</main>

@@ -1,0 +1,65 @@
+ <!-- user info -->
+<main>
+    <section class="user">
+        <div class="mt-6 columns is-centered">
+            <div class="box column is-6 p-6">
+                <div class="columns is-centered">
+                    <div class="column is-3 profile-picture">
+                        <figure class="image is-128x128">
+                            <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png">
+                        </figure>
+                    </div>
+                    <div class="column is-9 profile-info">
+                        <p class="title is-3 is-spaced">
+                            <%= @current_user.name %>
+                        </p>
+                        <button class="button is-rounded">Edit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="mt-6 columns is-centered">
+            <div class="tabs is-centered">
+                <ul>
+                    <li id="home_tab" class="is-active"><a href="/users/index">Home</a>
+                    </li>
+                    <li id="other_tab"><a href="/users/likes">Likes</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+     <section>
+        <% @posts.each do |post| %>
+            <div class="columns is-centered mt-2 mb-2">
+                <div class="box column is-6">
+                    <article class="media">
+                        <figure class="media-left">
+                        <p class="image is-64x64">
+                            <img src="https://bulma.io/images/placeholders/128x128.png">
+                        </p>
+                        </figure>
+                        <div class="media-content">
+                        <div class="content">
+                            <p>
+                            <strong>John Smith</strong> <small>@johnsmith</small> <small>31m</small>
+                            <br>
+                            <%= post.content %>
+                            </p>
+                        </div>
+                        <nav class="level is-mobile">
+                            <div class="level-left">
+                            <a class="level-item">
+                                <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                            </a>
+                            </div>
+                        </nav>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        <% end %>
+    </section>
+</main>

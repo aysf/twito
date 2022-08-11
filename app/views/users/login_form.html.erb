@@ -1,0 +1,30 @@
+ <!-- login form -->
+<main class="form">
+    <div class="columns is-centered">
+        <div class="column is-4">
+
+                <%= form_tag("/login", {class: 'box'}) do %>
+                        <% if @error_message %>
+                            <div class="form-error">
+                                <%= @error_message %>
+                            </div>
+                        <% end %>
+                        <div class="field">
+                        <label class="label">Email</label>
+                            <div class="control">
+                                <input name="email" class="input" type="email" placeholder="e.g. alex@example.com" value="<%= @email %>">
+                            </div>
+                        </div>
+                    
+                        <div class="field">
+                        <label class="label">Password</label>
+                            <div class="control">
+                                <input name="password" class="input" type="password" placeholder="********" value="<%= @password %>">
+                            </div>
+                        </div>
+                    
+                        <input class="button is-primary" type="submit" value="Login">
+                <% end %>
+        </div>
+    </div>
+</main>

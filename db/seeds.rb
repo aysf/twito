@@ -5,3 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+require_relative '../lib/populator_fix.rb'
+
+User.populate 10 do |u|
+    u.name = Faker::Name.first_name
+    u.email = Faker::Internet.emwail
+end

@@ -2,15 +2,82 @@
 <html>
   <head>
     <title>Twito</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+  
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+    <%# <link rel="stylesheet" href="./assets/css/style.css"> %>
   </head>
 
-  <body>
-    <%= yield %>
-  </body>
+<body>
+    <div id="app">
+        <header>
+            <nav class="navbar" role="navigation" aria-label="main navigation">
+                <div class="navbar-brand">
+                    <a class="navbar-item" href="/">
+                        <%= image_tag("twito.png", width: 112) %>
+                    </a>
+            
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+                </div>
+        
+                <div id="navbarBasicExample" class="navbar-menu">
+
+                    <div class="navbar-start">
+                        <%= link_to("Home", "/", class: "navbar-item") %>
+                        <%= link_to("About", "/about", class: "navbar-item") %>
+                        <%= link_to("Posts", "/posts", class: "navbar-item") %>
+                        <%= link_to("User", "/users/index", class: "navbar-item") %>
+                        
+                    </div>
+            
+                    <div class="navbar-end">
+                            <div class="navbar-item">
+                            <div class="buttons">
+                                <% if @current_user %>
+
+                                    <%= link_to "/users/#{@current_user.id}", method: :get, class: "button is-light" do %>
+                                        <figure class="image">
+                                            <%= image_tag "/user_images/#{@current_user.image_name}", class: "is-rounded", alt: "#{@current_user.name}", title: "#{@current_user.name}" %>
+                                        </figure>
+                                    <% end %>
+                                    <%= link_to("Log out", "/logout", method: :post, class: "button is-danger" ) %>
+                                <% else %>
+                                    <%= link_to("Sign up", "/signup", class: "button is-primary") %>
+                                    <%= link_to("Login", "/login", class: "button is-light") %>
+                                <% end %>
+                            </div>
+                            </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <% if flash[:notice] %>
+            <div class="flash">
+                <%= flash[:notice] %>
+            </div>
+        <% end %>
+        <!-- content -->
+     <%= yield %>
+    
+        <footer class="footer">
+            <div class="content has-text-centered">
+                <p>
+                    <strong>Twito</strong> by <a href="https://github.com/aysf">Ananto</a>. As part of 
+                    <a href="https://digitalent.kominfo.go.id/detail/pelatihan/3089?akademiId=152">Ruby Training</a> by Digital Talent Scholarship. 
+                    <br><a href='https://www.freepik.com/vectors/hand-drawn-bird'>Bird logo</a> and <a href='https://www.freepik.com/vectors/community-people'> Comunity People Vector </a>created by freepik
+                </p>
+            </div>
+        </footer>
+    </div>
+</body>
 </html>

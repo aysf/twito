@@ -6,7 +6,7 @@ twit to gather (twito) is a project from Ruby training held by Digital Talent Sc
 
 - Ruby 2.7.6
 - Rails 6.1.6.1
-- Postgresql
+- PostgreSQL
 
 # How to use
 

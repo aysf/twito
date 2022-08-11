@@ -1,0 +1,24 @@
+ <!-- signup form -->
+<main class="form">
+    <div class="columns is-centered">
+        <div class="column is-4">
+                <%= form_with url: "/signup", method: :post do |form| %>
+                    <form class="box">
+
+                        <%= form.label :full_name, class: "label mt-3" %>
+                        <%= form.text_field :name, class: "input" %>
+
+                        <%= form.label :email, class: "label mt-3" %>
+                        <%= form.email_field :email, class: "input" %>
+                    
+
+                        <%= form.label :password, class: "label mt-3" %>
+                        <%= form.password_field :password, class: "input" %>
+
+                        <%= form.submit "Sign Up", class: "button is-primary mt-3" %>
+
+                    </form>
+                <% end %>
+        </div>
+    </div>
+</main>
