@@ -1,5 +1,7 @@
 # TWITO
 
+![twito](twito.png)
+
 twit to gather (twito) is a project from Ruby training held by Digital Talent Scholarship
 
 ## Requirement
