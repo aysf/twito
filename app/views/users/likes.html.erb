@@ -6,12 +6,12 @@
                 <div class="columns is-centered">
                     <div class="column is-3 profile-picture">
                         <figure class="image is-128x128">
-                            <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png">
+                             <img class="is-rounded" src="<%= "/user_images/#{@user.image_name}" %>" >
                         </figure>
                     </div>
                     <div class="column is-9 profile-info">
                         <p class="title is-3 is-spaced">
-                            <%= @current_user.name %>
+                            <%= @user.name %>
                         </p>
                         <button class="button is-rounded">Edit</button>
                     </div>
@@ -45,17 +45,28 @@
                         <div class="media-content">
                            <div class="content">
                                     <p>
-                                    <strong><%= @user.name %></strong> 
+                                    <strong><%= link_to "#{post.user.name}" ,"/users/#{post.user.id}" %></strong> 
                                     <%# <small>@johnsmith</small> <small>31m</small> %>
                                     <br>
                                     <%= post.content %>
                                     </p>
                             </div>
-                        <nav class="level is-mobile">
+                            <nav class="level is-mobile">
                             <div class="level-left">
                                 <a class="level-item">
-                                    <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                                    <% if Like.find_by(user_id: @current_user.id, post_id: post.id) %>
+                                        <%= link_to("/likes/#{post.id}/destroy", {method: "post"}) do %>
+                                        <%# <span class="fa fa-heart like-btn-unlike"></span> %>
+                                        <span class="icon is-small"><i class="fas fa-heart" style="color: red"></i></span>
+                                        <% end %>
+                                    <% else %>
+                                        <%= link_to("/likes/#{post.id}/create", {method: "post"}) do %>
+                                        <%# <span class="fa fa-heart like-btn"></span> %>
+                                        <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                                        <% end %>
+                                    <% end %>
                                 </a>
+                                <span>&nbsp; <%= post.likes_count %> </span>
                             </div>
                         </nav>
                         </div>

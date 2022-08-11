@@ -11,9 +11,11 @@
                     </div>
                     <div class="column is-9 profile-info">
                         <p class="title is-3 is-spaced">
-                            <%= @current_user.name %>
+                            <%= @user.name %>
                         </p>
-                        <%= link_to "Edit", "/users/#{@user.id}/edit", class: "button is-rounded" %>
+                        <% if @current_user.id == @user.id %>
+                         <%= link_to "Edit", "/users/#{@user.id}/edit", class: "button is-rounded" %>
+                        <% end %>
                     </div>
                 </div>
             </div>
@@ -44,19 +46,30 @@
                         <div class="media-content">
                             <div class="content">
                                 <p>
-                                    <strong><%= @user.name %></strong> 
+                                    <strong><%= link_to "#{@user.name}" ,"/users/#{@user.id}" %></strong> 
                                     <%# <small>@johnsmith</small> <small>31m</small> %>
                                     <br>
                                     <%= post.content %>
                                 </p>
                             </div>
-                        <nav class="level is-mobile">
-                            <div class="level-left">
-                                <a class="level-item">
-                                    <span class="icon is-small"><i class="fas fa-heart"></i></span>
-                                </a>
-                            </div>
-                        </nav>
+                            <nav class="level is-mobile">
+                                <div class="level-left">
+                                    <a class="level-item">
+                                        <% if Like.find_by(user_id: @current_user.id, post_id: post.id) %>
+                                            <%= link_to("/likes/#{post.id}/destroy", {method: "post"}) do %>
+                                            <%# <span class="fa fa-heart like-btn-unlike"></span> %>
+                                            <span class="icon is-small"><i class="fas fa-heart" style="color: red"></i></span>
+                                            <% end %>
+                                        <% else %>
+                                            <%= link_to("/likes/#{post.id}/create", {method: "post"}) do %>
+                                            <%# <span class="fa fa-heart like-btn"></span> %>
+                                            <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                                            <% end %>
+                                        <% end %>
+                                    </a>
+                                    <span>&nbsp; <%= post.likes_count %> </span>
+                                </div>
+                            </nav>
                         </div>
                     </article>
                 </div>

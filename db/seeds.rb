@@ -8,7 +8,43 @@
 
 require_relative '../lib/populator_fix.rb'
 
-User.populate 10 do |u|
-    u.name = Faker::Name.first_name
-    u.email = Faker::Internet.emwail
+Like.destroy_all
+Post.destroy_all
+User.destroy_all
+
+3.times do |index|
+    User.create!(
+        id: index+1,
+        name: Faker::Name.first_name,
+        email: Faker::Internet.email,
+        password: Faker::Alphanumeric.alpha(number: 10),
+        image_name: (index+1).to_s + ".jpg")
 end
+
+User.create!([{
+    id: 4,
+    name: "Budi",
+    email: "budi@example.com",
+    password: "123",
+    image_name: "0.jpg"
+}])
+
+p "Created #{User.count} users"
+
+30.times do |index|
+    Post.create!(
+        id: index+1,
+        content: Faker::Lorem.paragraph_by_chars(number: 140, supplemental: false),
+        user_id: rand(1..3))
+end
+
+p "Created #{Post.count} posts"
+
+30.times do |index|
+    Like.create!(
+        post_id: index+1,
+        user_id: rand(1..4)
+    )
+end
+
+p "Created #{Like.count} likes"

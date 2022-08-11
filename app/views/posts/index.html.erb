@@ -1,39 +1,41 @@
  <!-- POSTS -->
         <main>
             <section>
-                <div class="columns is-centered mt-2 mb-4">
-                    <div class="box column is-6">
-                        <article class="media">
-                            <figure class="media-left">
-                                <p class="image is-64x64">
-                                    <img src="<%= "/user_images/#{@current_user.image_name}" %>" >
-                                </p>
-                            </figure>
-                         
-                                <div class="media-content">
-                                    <%= form_tag("/posts/create") do %>
-                                        <div class="field">
-                                            <p class="control">
-                                                <textarea class="textarea" name="content" placeholder="What's happening?"><%= @post.content %></textarea>
-                                            </p>
-                                            <% @post.errors.full_messages.each do |message| %>
-                                                <%= message %>
-                                            <% end %>
-                                        </div>
-                                        <nav class="level">
-                                            <div class="level-left">
-                                                <div class="level-item">
-                                                    <input class="button is-info" type="submit" value="Post">
-                                                </div>
+                <% if @current_user %>
+                    <div class="columns is-centered mt-2 mb-4">
+                        <div class="box column is-6">
+                            <article class="media">
+                                <figure class="media-left">
+                                    <p class="image is-64x64">
+                                        <img src="<%= "/user_images/#{@current_user.image_name}" %>" >
+                                    </p>
+                                </figure>
+                            
+                                    <div class="media-content">
+                                        <%= form_tag("/posts/create") do %>
+                                            <div class="field">
+                                                <p class="control">
+                                                    <textarea class="textarea" name="content" placeholder="What's happening?"><%= @post.content %></textarea>
+                                                </p>
+                                                <% @post.errors.full_messages.each do |message| %>
+                                                    <%= message %>
+                                                <% end %>
                                             </div>
-                                        </nav>
-                                    <% end %>
-                                </div>
-                           
-                        </article>
+                                            <nav class="level">
+                                                <div class="level-left">
+                                                    <div class="level-item">
+                                                        <input class="button is-info" type="submit" value="Post">
+                                                    </div>
+                                                </div>
+                                            </nav>
+                                        <% end %>
+                                    </div>
+                            
+                            </article>
+                        </div>
+                        <br>
                     </div>
-                    <br>
-                </div>
+                <% end %>
             </section>
             <section>
                 <% @posts.each do |post| %>
@@ -47,21 +49,42 @@
                                 </p>
                                 </figure>
                                 <div class="media-content">
-                                <div class="content">
-                                    <p>
-                                    <strong><%= @user.name %></strong> 
-                                    <%# <small>@johnsmith</small> <small>31m</small> %>
-                                    <br>
-                                    <%= post.content %>
-                                    </p>
-                                </div>
-                                <nav class="level is-mobile">
+                                    <div class="content">
+                                        <p>
+                                        <strong><%= link_to "#{@user.name}" ,"/users/#{@user.id}" %></strong> 
+                                        <%# <small>@johnsmith</small> <small>31m</small> %>
+                                        <br>
+                                        <%= post.content %>
+                                        </p>
+                                    </div>
+                                    <nav class="level is-mobile">
                                     <div class="level-left">
-                                    <a class="level-item">
-                                        <span class="icon is-small"><i class="fas fa-heart"></i></span>
-                                    </a>
+                                        <a class="level-item">
+
+                                            <% if @current_user %>
+
+                                                <% if Like.find_by(user_id: @current_user.id, post_id: post.id) %>
+                                                    <%= link_to("/likes/#{post.id}/destroy", {method: "post"}) do %>
+                                                    <%# <span class="fa fa-heart like-btn-unlike"></span> %>
+                                                    <span class="icon is-small"><i class="fas fa-heart" style="color: red"></i></span>
+                                                    <% end %>
+                                                <% else %>
+                                                    <%= link_to("/likes/#{post.id}/create", {method: "post"}) do %>
+                                                    <%# <span class="fa fa-heart like-btn"></span> %>
+                                                    <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                                                    <% end %>
+                                                <% end %>
+
+                                            <% else %>
+
+                                                <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                                                
+                                            <% end %>
+                                        </a>
+                                        <span>&nbsp; <%= post.likes_count %> </span>
                                     </div>
                                 </nav>
+
                                 </div>
                             </article>
                         </div>

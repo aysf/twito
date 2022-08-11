@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user, {only: [:index, :show, :edit, :update]}
   before_action :forbid_login_user, {only: [:new, :create, :login_form, :login]}
-  # before_action :ensure_correct_user, {only: [:edit, :update]}
+  before_action :ensure_correct_user, {only: [:edit, :update]}
 
   def index
     # TODO fix
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
       name: params[:name], 
       email: params[:email],
       password: params[:password],
-      image_name: "default.jpg"
+      image_name: "0.jpg"
     )
     if @user.save 
       session[:user_id] = @user.id
@@ -82,10 +82,15 @@ class UsersController < ApplicationController
   end
 
   def likes
-    # TODO fix
     @user = User.find_by(id: params[:id])
     @likes = Like.where(user_id: @user.id)
   end
 
+  def ensure_correct_user
+    if @current_user.id != params[:id].to_i
+      flash[:notice] = "Unauthorized access"
+      redirect_to("/posts")
+    end
+  end
 
 end
