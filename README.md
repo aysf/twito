@@ -21,5 +21,11 @@ twit to gather (twito) is a project from Ruby training held by Digital Talent Sc
 - open `http://localhost:3000/`
 - login with username `budi@example.com` and password `123`
 
+## Troubleshooting
+
+### Cross Platform
+
+I have problem during installation this repo that I build on my Mac to Linux environment. So I should run `bundle lock --add-platform x86_64-linux` before cloning this repo to production environment. [source](https://calvin.my/posts/add-platform-to-ruby-application)
+
 
 
