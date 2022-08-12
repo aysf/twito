@@ -27,5 +27,9 @@ twit to gather (twito) is a project from Ruby training held by Digital Talent Sc
 
 I have problem during installation this repo that I build on my Mac to Linux environment. So I should run `bundle lock --add-platform x86_64-linux` before cloning this repo to production environment. [source](https://calvin.my/posts/add-platform-to-ruby-application)
 
+### Gem Spring Error
+
+If you face problem with this gem. Just disabling it by `export DISABLE_SPRING=true`. [source](https://til.hashrocket.com/posts/apfwqplcrk-disable-spring-in-rails-with-disablespring) 
+
 
 
