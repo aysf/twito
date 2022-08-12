@@ -7,6 +7,7 @@ require "capistrano/deploy"
 require 'capistrano/rails'
 require 'capistrano/passenger'
 require 'capistrano/rbenv'
+require 'capistrano/secrets_yml'
 
 # Load the SCM plugin appropriate to your project:
 #
