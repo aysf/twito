@@ -81,6 +81,6 @@ test:
 #
 production:
   <<: *default
-  database: twito_production
-  username: twito
-  password: <%= ENV['TWITO_DATABASE_PASSWORD'] %>
+  database: <%= ENV.fetch("DB_NAME") %>
+  username: <%= ENV.fetch("DB_USER") %>
+  password: <%= ENV['DB_PASSWORD'] %>
