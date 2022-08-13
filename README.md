@@ -1,6 +1,6 @@
 # TWITO
 
-![twito](twito.png)
+This project was moved to https://github.com/aysf/twitor
 
 twit to gather (twito) is a project from Ruby training held by Digital Talent Scholarship
 
